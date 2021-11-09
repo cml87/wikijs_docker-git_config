@@ -24,6 +24,8 @@ services:
       DB_USER: wikijs
       DB_PASS: wikijsrocks
       DB_NAME: wiki
+    volumes:
+      - '${LOCAL_PRIVATE_WIKIJS_SSH_KEY_PATH}:${CONTAINER_PRIVATE_WIKIJS_SSH_KEY_PATH}'
     restart: unless-stopped
     ports:
       - "70:3000"
