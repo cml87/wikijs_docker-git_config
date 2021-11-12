@@ -5,13 +5,13 @@ services:
     image: postgres:11-alpine
     environment:
       POSTGRES_DB: wiki
-      POSTGRES_PASSWORD: wikijsrocks
+      POSTGRES_PASSWORD: wikijs21corsair
       POSTGRES_USER: wikijs
     logging:
       driver: "none"
     restart: unless-stopped
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - wikijs-db_vol:/var/lib/postgresql/data
 
   wiki:
     image: requarks/wiki:2
@@ -22,13 +22,14 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: wikijs
-      DB_PASS: wikijsrocks
+      DB_PASS: wikijs21corsair
       DB_NAME: wiki
-    volumes:
-      - '${LOCAL_PRIVATE_WIKIJS_SSH_KEY_PATH}:${CONTAINER_PRIVATE_WIKIJS_SSH_KEY_PATH}'
+    #volumes:
+    # - '${LOCAL_PRIVATE_WIKIJS_SSH_KEY_PATH}:${CONTAINER_PRIVATE_WIKIJS_SSH_KEY_PATH}'
     restart: unless-stopped
     ports:
       - "70:3000"
 
 volumes:
-  db-data:
+  wikijs-db_vol:
+    external: true
