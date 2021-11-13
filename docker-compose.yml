@@ -6,7 +6,7 @@ services:
     container_name: wikijs_db
     environment:
       POSTGRES_DB: wiki
-      POSTGRES_PASSWORD: wikijs21corsair
+      POSTGRES_PASSWORD: wikijs21set
       POSTGRES_USER: wikijs
     logging:
       driver: "none"
@@ -18,16 +18,14 @@ services:
     image: requarks/wiki:2
     container_name: wikijs_app
     depends_on:
-      - wikijs_db
+      - db
     environment:
       DB_TYPE: postgres
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: wikijs
-      DB_PASS: wikijs21corsair
+      DB_PASS: wikijs21set
       DB_NAME: wiki
-    #volumes:
-    # - '${LOCAL_PRIVATE_WIKIJS_SSH_KEY_PATH}:${CONTAINER_PRIVATE_WIKIJS_SSH_KEY_PATH}'
     restart: unless-stopped
     ports:
       - "70:3000"
