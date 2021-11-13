@@ -29,6 +29,8 @@ services:
       DB_PASS: wikijs21set
       DB_NAME: wiki
     restart: unless-stopped
+    volumes:
+      - '${LOCAL_PRIVATE_WIKIJS_SSH_KEY_PATH}:${CONTAINER_PRIVATE_WIKIJS_SSH_KEY_PATH}'
     ports:
       - "70:3000"
 
