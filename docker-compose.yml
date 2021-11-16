@@ -1,8 +1,12 @@
+# run with command
+# WHOAMI="$(whoami)" docker-compose up
+
+
 version: "3"
 services:
 
   db:
-    image: postgres:11-alpine
+    image: cml87/wikijs_db:nano #postgres:11-alpine
     container_name: wikijs_db
     hostname: wikijs_db
     environment:
@@ -16,7 +20,7 @@ services:
       - wikijs-db_vol:/var/lib/postgresql/data
 
   wiki:
-    image: requarks/wiki:2
+    image: cml87/wikijs_app:nano  #requarks/wiki:2
     container_name: wikijs_app
     hostname: wikijs_app
     depends_on:
@@ -30,7 +34,7 @@ services:
       DB_NAME: wiki
     restart: unless-stopped
     volumes:
-      - '${LOCAL_PRIVATE_WIKIJS_SSH_KEY_PATH}:${CONTAINER_PRIVATE_WIKIJS_SSH_KEY_PATH}'
+      - '/home/${WHOAMI}/.ssh/wikijs_app-sshkey:${CONTAINER_PRIVATE_WIKIJS_SSH_KEY_PATH}'
     ports:
       - "70:3000"
 
