@@ -1,6 +1,7 @@
 # run with command
 # WHOAMI="$(whoami)" docker-compose up
-
+# or simply
+# WHOAMI=<output of echo $USER> docker-compose up
 
 version: "3"
 services:
