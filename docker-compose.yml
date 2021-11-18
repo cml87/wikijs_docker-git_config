@@ -2,6 +2,8 @@
 # WHOAMI="$(whoami)" docker-compose up
 # or simply
 # WHOAMI=<output of echo $USER> docker-compose up
+# Note that this variable need also to be passed when doing docker-compose down
+
 
 version: "3"
 services:
