@@ -39,6 +39,24 @@ https://www.howtogeek.com/168119/fixing-warning-unprotected-private-key-file-on-
 The git repo will store all pages of the wiki separately, so they can be seen directly if needed. That's how it's useful. However, the inteded way to have the data available in a new 
 host where the wiki is started with the docker file, is to download the backup volume from my drive and mount it in the data directory the db conatainer needs.
 
+
+##Backup and restore wiki data (pages)
+
+The data for the pages displayed in the wiki is stored in a postgresql db. The data foleder for this db is in the db container of the application at /var/lib/postgresql/data. This is the directory I will backup as data.tar.gz
+
+###Backup data
+
+The backup file data.tar.gz will be created through the script backup_my_wiki.sh. This script works by ...
+
+###Restore data
+
+To restore the wiki data from the file data.tar.gz I need to extract its content directly into a volume called wikijs-db_vol, as this volume is mounted into the data directory of the db container of the application, /var/lib/postgresql/data. This will be achieved by means of the script restore_my_wiki.sh. This script works by ...
+
+
+
+
+________
+
 A backup can be get with the following command
 
 docker run --rm --volumes-from wikijs_db -v $(pwd):/backup ubuntu bash -c "cd /var/lib/postgresql && tar -zcvf /backup/data.tar.gz data"
